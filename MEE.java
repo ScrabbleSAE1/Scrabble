@@ -1,5 +1,5 @@
 public class MEE{  
-
+//heyhey
     private int [] tabFreq;
     private int nbTotEx;
 
@@ -38,14 +38,14 @@ public class MEE{
         */
         public boolean estVide (){
         int i=0;
-        boolean Vide=true;
-        while (i < this.tabFreq.length || Vide){
-               if(e.tabFreq[i]!=""){
-                   Vide=false;
+        boolean Vide1=true;
+        while (i < this.tabFreq.length || Vide1){
+               if(this.tabFreq[i]!=0){
+                   Vide1=false;
                    i++;
-        }
-        return Vide;
-        }
+               }
+            }
+        return Vide1;
     }
           
         /**
@@ -85,10 +85,11 @@ public class MEE{
         * action/résultat : transfère un exemplaire de i de this vers e s’il
         * en existe, et retourne vrai ssi cette action a pu être effectuée */
         public boolean transfere (MEE e, int i) {
+
         boolean transferer=false;
         if(this.tabFreq[i]!=0){
-           this.tabFreq.retire(i);
-           e.tabFreq.ajoute(i);
+           this.retire(i);
+           e.ajoute(i);
         }
         return transferer;
         }
@@ -96,21 +97,24 @@ public class MEE{
         * action : tranfère k exemplaires choisis aléatoirement de this vers e * dans la limite du contenu de this
         * résultat : le nombre d’exemplaires effectivement transférés
         */
-        public int transfereAleat (MEE e, int k) {
+        public int transfereAleat(MEE e, int k) {
+        int compteur = 0;
         assert k<this.nbTotEx;
         while (k>0){ 
-                boolean vide=true;
-                while(vide){
-                      int i=random.nextIn(this.tabFreq.length);
-                      if(this.java[i]=""){
-                        this.tabFreq.retire(i);
-                        e.tabFreq.ajoute(i);
-                        vide=false;
+                boolean Vide2=true;
+                while(Vide2){
+                      int i=Ut.randomMinMax(0,this.tabFreq.length);
+                      if(this.tabFreq[i]==0){
+                        this.retire(i);
+                        e.ajoute(i);
+                        Vide2=false;
+                        compteur ++;
                         }
                           k--; 
                      }
                 }
-             }
+                return compteur;
+            }
         /**
         * pré-requis : tabFreq.length <= v.length
         * résultat : retourne la somme des valeurs des exemplaires des
@@ -119,7 +123,7 @@ public class MEE{
         */
         public int sommeValeurs (int[] v){
                 int somme=0;
-            for(i=0;i<this.tabFreq.length;i++){
+            for(int i=0;i<this.tabFreq.length;i++){
                 somme=this.tabFreq[i]*v[i];
         }
             return somme;
