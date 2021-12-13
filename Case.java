@@ -25,6 +25,7 @@ public class Case{
   * pré-requis : let est une lettre majuscule
   */
   public void setLettre (char let){
+    
 
   /**
   * résultat : vrai ssi la case est recouverte par une lettre
