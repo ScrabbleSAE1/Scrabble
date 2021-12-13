@@ -1,4 +1,3 @@
-import java.util.Random; 
 public class MEE{  
 
     private int [] tabFreq;
@@ -32,7 +31,8 @@ public class MEE{
     */
     public MEE (MEE e){
          this.tabFreq=e.tabFreq;
-         this.nbToEx=e.nbToEx;
+         this.nbTotEx=e.nbTotEx;
+    }
         /**
         * résultat : vrai ssi cet ensemble est vide
         */
@@ -46,13 +46,14 @@ public class MEE{
         }
         return Vide;
         }
+    }
           
         /**
         * pré-requis : 0 <= i < tabFreq.length
         * action : ajoute un exemplaire de i à this
         */
         public void ajoute (int i) {
-               this.tabFreq[i]+=1;
+            this.tabFreq[i]+=1;
         }
         /**
         * pré-requis : 0 <= i < tabFreq.length
@@ -60,7 +61,7 @@ public class MEE{
         */
         public boolean retire (int i) {
         boolean retirer =false;
-        if(this.tabFreq[i]=""){
+        if(this.tabFreq[i]==0){
            this.tabFreq[i]-=1;
             retirer=true;
         }
@@ -72,9 +73,9 @@ public class MEE{
         * et le retourne
         */
         public int retireAleat () {
-        int i=random.nextIn(this.tabFreq.length);
-        while(this.tabFreq[i]=""){
-              int i=random.nextIn(this.tabFreq.length);
+        int i=Ut.randomMinMax(0,this.tabFreq.length);
+        while(this.tabFreq[i]==0){
+            i=Ut.randomMinMax(0,this.tabFreq.length);
         }
         this.tabFreq[i]-=1;
         return i;
@@ -85,7 +86,7 @@ public class MEE{
         * en existe, et retourne vrai ssi cette action a pu être effectuée */
         public boolean transfere (MEE e, int i) {
         boolean transferer=false;
-        if(this.tabFreq[i]!=""){
+        if(this.tabFreq[i]!=0){
            this.tabFreq.retire(i);
            e.tabFreq.ajoute(i);
         }
@@ -101,12 +102,12 @@ public class MEE{
                 boolean vide=true;
                 while(vide){
                       int i=random.nextIn(this.tabFreq.length);
-                      if(this.tabFreq[i]=""){
-                         this.tabFreq.retire(i);
-                         e.tabFreq.ajoute(i);
-                         vide=false;
+                      if(this.java[i]=""){
+                        this.tabFreq.retire(i);
+                        e.tabFreq.ajoute(i);
+                        vide=false;
                         }
-                          k-- 
+                          k--; 
                      }
                 }
              }
@@ -123,3 +124,4 @@ public class MEE{
         }
             return somme;
     }
+}
