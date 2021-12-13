@@ -1,5 +1,5 @@
 public class MEE{  
-//heyhey
+    
     private int [] tabFreq;
     private int nbTotEx;
 
