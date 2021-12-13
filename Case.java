@@ -21,6 +21,7 @@ public class Case{
   */
   public char getLettre (){
     return this.Lettre;
+  }
   /**
   * pré-requis : let est une lettre majuscule
   */
