@@ -21,8 +21,15 @@ private Case [][] g; // g pour grille
   /**
   * résultat : chaîne décrivant ce Plateau
   */
-  public String toString (){
-    System.out.println();
+  public String toString(){
+  int nbLigne=0;
+  int nbColonne=0;
+    for(int i=0;i<nbLigne;i++){
+      for(int j=0;j<nbColonne;j++){
+       System.out.print(" | "+ g[i][j]);
+      }
+    }
+
     
   }
 }
