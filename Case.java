@@ -34,9 +34,10 @@ public class Case{
   */
   public boolean estRecouverte (){
     boolean recouverte=false;
-    if(this.Lettre!=""){recouverte=true;}
+    if(this.Lettre!=0){recouverte=true;}
     return recouverte;
   }
   public String toString (){
    return ("uneCouleur : "+ this.uneCouleur + "Lettre : "+ this.Lettre);
  }
+}
