@@ -31,7 +31,7 @@ public class Plateau{
   
 
 
-   /**
+  /**
   * résultat : chaîne décrivant ce Plateau
   */
   public String toString(){
@@ -59,4 +59,33 @@ public class Plateau{
     Plateau p=new Plateau();
     System.out.println(p);
   }
+
+  
+/**
+* pré-requis : mot est un mot accepté par CapeloDico,
+* 0 <= numLig <= 14, 0 <= numCol <= 14, sens est un élément
+* de {’h’,’v’} et l’entier maximum prévu pour e est au moins 25
+* résultat : retourne vrai ssi le placement de mot sur this à partir
+* de la case (numLig, numCol) dans le sens donné par sens à l’aide
+* des jetons de e est valide.
+*/
+
+public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE e) {
+  boolean placement = false;
+  int k=0;
+  int j=numCol;
+  int tab[] = e.tabFreq;
+  if(e.estVide()){
+    if(mot.length() <= 2){return placement;}
+    while(k<mot.length() || e.tabFreq[k] !=0){ 
+      
+    }
+    if(sens == 'h' && numLig == 8){
+      while(j<mot.length() || placement == false){
+        j += 1;
+        if(j == 8){placement = true;}
+      }
+    }
+  }
 }
+
