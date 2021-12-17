@@ -31,7 +31,7 @@ public class Plateau{
   
 
 
-  /**
+   /**
   * résultat : chaîne décrivant ce Plateau
   */
   public String toString(){
@@ -44,7 +44,8 @@ public class Plateau{
         char Lettre = g[i][j].getLettre();
         if(Lettre==' '){
           int couleur = g[i][j].getCouleur();
-          affichage += couleur +" | " ;
+          if(couleur!=1){affichage += couleur +" | " ;}
+          else{affichage+=' ' +" | ";}
         }
         else{
           affichage += Lettre +" | " ;
