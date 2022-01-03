@@ -1,5 +1,5 @@
 public class MEE{  
-    
+
     private int [] tabFreq;
     private int nbTotEx;
 
@@ -31,6 +31,10 @@ public class MEE{
     */
     public MEE (MEE e){
          this.tabFreq=e.tabFreq;
+         this.tabFreq= new int[e.tabFreq.length];
+         for(int i=0; i<e.tabFreq.length;i++){
+             this.tabFreq[i]=e.tabFreq[i];
+         }
          this.nbTotEx=e.nbTotEx;
     }
         /**
@@ -57,7 +61,8 @@ public class MEE{
         }
         /**
         * pré-requis : 0 <= i < tabFreq.length
-        * action/résultat : retire un exemplaire de i de this s’il en existe, * et retourne vrai ssi cette action a pu être effectuée
+        * action/résultat : retire un exemplaire de i de this s’il en existe,
+        * et retourne vrai ssi cette action a pu être effectuée
         */
         public boolean retire (int i) {
         boolean retirer =false;
