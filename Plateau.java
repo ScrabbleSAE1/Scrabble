@@ -77,13 +77,14 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
   int tab[] = e.tabFreq;
   boolean lettre_dispo = true;
   boolean case_vide_autour = true;
+  boolean au_moins_un = false;
   if(e.estVide()){
     if(mot.length() <= 2){return placement;}
     while(k<mot.length() && e.tabFreq[k] !=0 && lettre_dispo){ 
       if (e.tabFreq[k] == 0){
         lettre_dispo = false;
         placement = false;}
-      else if (k =mot.length() && lettre_dispo){placement = true;}
+      else if (k == mot.length() && lettre_dispo){placement = true;}
       k += 1;
     }
     if(sens == 'h' && numLig == 8){
@@ -100,20 +101,53 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
     }
   }
   else{
-    if(sens == 'h'){
-      while (k<mot.length() &&  j<=15 && case_vide_autour){
-        if (j>15){placement = false;}
-        k += 1;
-        j += 1;
+    if(sens == 'h'){//vérifie les cases à gauche et à droite de la zone
+      if(j>=0 && j<=15){
+        if(this.g[i][j-1].estRecouverte()){case_vide_autour = false;} //1ere case "gauche"
+        if(this.g[i][j+mot.length()].estRecouverte()){case_vide_autour = false;}//dernière case "droite"
       }
     }
-    else if(sens == 'v'){
-      while (k<mot.length() &&  i<=15 && case_vide_autour){
-        if (i>15){placement = false;}
-        k += 1;
-        i += 1;
+    else if(sens == 'v'){//vérifie les cases autour verticalement
+      if(i>=0 && i<=15){
+        if(this.g[i-1][j].estRecouverte()){case_vide_autour = false;} //1ere case "gauche"
+        if(this.g[i+mot.length()][j].estRecouverte()){case_vide_autour = false;}//dernière case "droite"
       }
+    }
+    if(sens == 'h'){
+      while(k<mot.length() && j<=15 && au_moins_un == false){
+        if(this.g[i][j].estRecouverte()){au_moins_un = false;}
+        k+=1;
+        j+=1;
     }
   }
-}
+  else if(sens == 'v'){
+    while(k<mot.length() && i<=15 && au_moins_un == false){
+      if(this.g[i][j].estRecouverte()){au_moins_un = false;}
+      k+=1;
+      i+=1;
+    }
+  }
+    k = 0;
+    while(k<mot.length() && e.tabFreq[k] !=0){ 
+      if (e.tabFreq[k] == 0){
+        lettre_dispo = false;
+        placement = false;}
+      else if (k == mot.length() && lettre_dispo){placement = true;}
+      k += 1;
+   }
+  }
+  return placement;
+  }
+
+  /**
+  * pré-requis : le placement de mot sur this à partir de la case
+  * (numLig, numCol) dans le sens donné par sens est valide
+  * résultat : retourne le nombre de points rapportés par ce placement, le
+  * nombre de points de chaque jeton étant donné par le tableau nbPointsJet.
+  */
+  public int nbPointsPlacement(String mot, int numLig, int numCol,char sens, int[] nbPointsJet){
+    int nbPoint = 0;
+    while
+    return nbPoint;
+  }
 }
