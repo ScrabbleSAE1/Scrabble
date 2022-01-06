@@ -1,7 +1,7 @@
 public class MEE{  
 
-    private int [] tabFreq;
-    private int nbTotEx;
+    public int [] tabFreq;
+    public int nbTotEx;
 
     // tabFreq[i] est le nombre d’exemplaires
     // (fréquence) de l’élément i
