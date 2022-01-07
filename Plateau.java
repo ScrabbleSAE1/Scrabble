@@ -24,12 +24,10 @@ public class Plateau{
 
     for (int i=0; i!=plateau.length;i++){
       for (int j=0; j!=plateau[i].length;j++){
-        g[i][j]= new Case(plateau[i][j]);
+        g[i][j]=new Case(plateau[i][j]);
       }
     }
   }
-  
-
 
   /**
   * résultat : chaîne décrivant ce Plateau
@@ -78,6 +76,8 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
   boolean lettre_dispo = true;
   boolean case_vide_autour = true;
   boolean au_moins_un = false;
+  boolean meme_lettre=true;
+
   if(e.estVide()){
     if(mot.length() <= 2){return placement;}
     while(k<mot.length() && e.tabFreq[k] !=0 && lettre_dispo){ 
@@ -87,6 +87,7 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
       else if (k == mot.length() && lettre_dispo){placement = true;}
       k += 1;
     }
+
     if(sens == 'h' && numLig == 8){
       while(j<mot.length() || placement == false){
         if(j == 8){placement = true;}
@@ -100,6 +101,7 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
       }
     }
   }
+
   else{
     if(sens == 'h'){//vérifie les cases à gauche et à droite de la zone
       if(j>=0 && j<=15){
@@ -113,6 +115,27 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
         if(this.g[i+mot.length()][j].estRecouverte()){case_vide_autour = false;}//dernière case "droite"
       }
     }
+
+    if(sens == 'h'){
+      while(j>=15 && j<=mot.length()&& meme_lettre){
+        if(this.g[i][j].estRecouverte()){
+          if(this.g[i][j].getLettre()==mot.charAt(j)){placement=true;}
+        }
+        else{placement=false;}
+        j+=1;
+        }
+      }
+    
+      if(sens == 'v'){
+        while(i>=15 && i<=mot.length()&& meme_lettre){
+          if(this.g[i][j].estRecouverte()){
+            if(this.g[i][j].getLettre()==mot.charAt(i)){placement=true;}
+          }
+          else{placement=false;}
+          i+=1;
+          }
+        }
+      
     if(sens == 'h'){
       while(k<mot.length() && j<=15 && au_moins_un == false){
         if(this.g[i][j].estRecouverte()){au_moins_un = false;}
@@ -120,13 +143,14 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
         j+=1;
     }
   }
-  else if(sens == 'v'){
-    while(k<mot.length() && i<=15 && au_moins_un == false){
-      if(this.g[i][j].estRecouverte()){au_moins_un = false;}
-      k+=1;
-      i+=1;
+    else if(sens == 'v'){
+      while(k<mot.length() && i<=15 && au_moins_un == false){
+        if(this.g[i][j].estRecouverte()){au_moins_un = false;}
+        k+=1;
+        i+=1;
+      }
     }
-  }
+
     k = 0;
     while(k<mot.length() && e.tabFreq[k] !=0){ 
       if (e.tabFreq[k] == 0){
@@ -137,7 +161,9 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
    }
   }
   return placement;
-  }
+  
+}
+
 
   /**
   * pré-requis : le placement de mot sur this à partir de la case
@@ -147,7 +173,20 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
   */
   public int nbPointsPlacement(String mot, int numLig, int numCol,char sens, int[] nbPointsJet){
     int nbPoint = 0;
-    while
+    int j=numCol;
+    int i = numLig;
+    int[] nbPointsJetons=nbPointsJet;
+    int[] lettre={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    boolean position_lettre=false;
+    int compteur=0;
+    if(sens=='h'){
+      for(int x=0;x<mot.length()-1;x+=1){
+        this.g[i][j].getCouleur();
+          while(x<lettre.length && lettre[x]!=mot.charAt(x)){
+            if(lettre[x]==mot.charAt(x)){position_lettre=true;}
+            
+          }
+    }
     return nbPoint;
   }
 }
