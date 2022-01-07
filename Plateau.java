@@ -177,16 +177,84 @@ public boolean placementValide(String mot, int numLig, int numCol,char sens, MEE
     int i = numLig;
     int[] nbPointsJetons=nbPointsJet;
     int[] lettre={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-    boolean position_lettre=false;
+    int position_lettre=0;
     int compteur=0;
+    int couleur = 0;
+    boolean couleur_rose=false;
+    boolean couleur_rouge=false;
+    
     if(sens=='h'){
       for(int x=0;x<mot.length()-1;x+=1){
-        this.g[i][j].getCouleur();
+        couleur = this.g[i][j].getCouleur();
           while(x<lettre.length && lettre[x]!=mot.charAt(x)){
-            if(lettre[x]==mot.charAt(x)){position_lettre=true;}
-            
+            if(lettre[x]==mot.charAt(x)){position_lettre=x;}
           }
+        if(couleur == 1){compteur += nbPointsJetons[position_lettre];}
+        else if (couleur == 2){compteur += nbPointsJetons[position_lettre]*2;}
+        else if (couleur == 3){compteur += nbPointsJetons[position_lettre]*2;}
+        
+        else if (couleur == 4){
+          compteur += nbPointsJetons[position_lettre];
+          couleur_rose = true;
+        }
+        else if (couleur == 5){
+          compteur += nbPointsJetons[position_lettre];
+          couleur_rouge = true;
+        }
+        if(couleur_rose){compteur += compteur*2;}
+        else if(couleur_rouge){compteur += compteur*3;}
+      }
+    }
+    
+    else if(sens=='v'){
+      for(int y=0;y<mot.length()-1;y+=1){
+        couleur = this.g[i][j].getCouleur();
+          while(y<lettre.length && lettre[y]!=mot.charAt(y)){
+            if(lettre[y]==mot.charAt(y)){position_lettre=y;}
+          }
+        if(couleur == 1){compteur += nbPointsJetons[position_lettre];}
+        else if (couleur == 2){compteur += nbPointsJetons[position_lettre]*2;}
+        else if (couleur == 3){compteur += nbPointsJetons[position_lettre]*2;}
+        
+        else if (couleur == 4){
+          compteur += nbPointsJetons[position_lettre];
+          couleur_rose = true;
+        }
+        else if (couleur == 5){
+          compteur += nbPointsJetons[position_lettre];
+          couleur_rouge = true;
+        }
+        if(couleur_rose){compteur += compteur*2;}
+        else if(couleur_rouge){compteur += compteur*3;}
+      }
     }
     return nbPoint;
   }
+
+  /**
+* pré-requis : le placement de mot sur this à partir de la case
+* (numLig, numCol) dans le sens donné par sens à l’aide des
+* jetons de e est valide.
+* action/résultat : effectue ce placement et retourne le
+* nombre de jetons retirés de e.
+*/
+public int place(String mot, int numLig, int numCol, char sens, MEE e){
+  int compteur = 0;
+  int j=numCol;
+  int i = numLig;
+  if(sens == 'h'){
+    for(int x=0; x<mot.length();x++){
+      if(this.g[i][j].estRecouverte() == false){compteur+=1;}
+      j+=1;
+    }
+  }
+  
+  if(sens == 'v'){
+    for(int x=0; x<mot.length();x++){
+      if(this.g[i][j].estRecouverte() == false){compteur+=1;}
+      i+=1;
+    }
+  }
+  return compteur;
+}
 }
