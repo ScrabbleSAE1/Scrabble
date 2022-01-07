@@ -6,13 +6,18 @@ public class Joueur {
       
     public Joueur(String unNom){
         this.nom=unNom;
-    }
+        this.chevalet={};
+        this.score=0;
+       }
+
     public String toString(){
         return("nom : "+ this.nom + " chevalet : "+ this.chevalet + "score : " +this.score);
     }
+
     public int getScore(){
         return score;
     }
+    
     public void ajouteScore(int nb){
        int nbMax=0;
         if(nb>nbMax){
